@@ -1,3 +1,45 @@
+// show buttons pressed value on screen
+// get the buttons value using query selector and event listener
+// We append this to our number element <<p>> variable 
+// then we append the <<p>> to our screen div. 
+
+
+// Show the button value in the screen
+const btns = document.querySelectorAll('.btn-c');
+const screen = document.querySelector('.screen');
+let number = document.createElement('p')
+number.classList.add('numArray')
+// console.log(btns);
+
+btns.forEach((e) => {
+  e.addEventListener('click', event =>{
+    let btnValue = event.target.innerText;
+    btnValue = document.createTextNode(btnValue)
+    number.appendChild(btnValue)
+    screen.appendChild(number)
+    console.log(number.innerHTML)
+  } )
+});
+
+const backSpace = document.querySelector('#delete');
+backSpace.addEventListener('click', event => {
+  number = backspace(number.innerHTML);
+  number = document.createTextNode(btnValue)
+
+  screen.appendChild(number)
+
+})
+function backspace(array){
+  array = array.slice(0, array.length -1)
+  return array;
+
+}
+
+function showNumber(e){
+  btnValue = e.innerText;
+  console.log(btnValue);
+}
+
 // Calculator
 // Create add function
 // Create a variable sum inside the function
@@ -35,7 +77,9 @@ function divide(a, b) {
 }
 
 // Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
+let c = 0;
 function operate(operator, a, b) {
-  return operator(a, b);
+  c = operator(a, b);
+  return c;
 }
-console.log(operate(substract, 8, 2, 2));
+// console.log(operate(substract, 8, 2));
