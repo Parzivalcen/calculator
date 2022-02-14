@@ -135,28 +135,31 @@ body {
 /* ----------
 CALCULATOR
 ------------- */
-.container{
+.container {
   display: flex;
   max-width: 300px;
   width: 300px;
 }
 
-.calculator{
+.calculator {
   border: 1px solid limegreen;
 }
 
-.screen{
+.screen {
   width: 300px;
   height: 100px;
   background: white;
 }
-.buttons{
+.buttons {
   max-width: 300px;
   width: 300px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
-.btn-c{
+.btn-c {
+  padding: 1.3rem;
+}
+#delete {
   padding: 1.3rem;
 }
