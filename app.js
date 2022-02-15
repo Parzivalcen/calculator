@@ -61,26 +61,37 @@ function clearAll() {
 // make the calculator work
 // the equal sign should call the operator function pressed
 // asign functions to the operators buttons, but dont call until equal sign is pressed
-// when operator is pressed asign the current value to variable
+// when operator or equal is pressed asign the current value to variable
+// 
 // use split to divide when there is an operator sign
 // [0] = a
 // [1] = b
 const equal = document.querySelector("#equal");
 let signs = document.querySelectorAll(".sign");
 let sign;
+// for assigment
+let a = 1;
+let b = 5;
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
     sign = element.innerHTML;
-    a = current;
-    console.log(typeof sign);
+    a = +number.innerHTML;
+    clearAll()
+    console.log(a)
+    // console.log(typeof sign);
   });
 });
 equal.addEventListener("click", () => {
   // if sign equals operator, operator equals ==
   let result = 0;
+  b = +number.innerHTML;
+  console.log(b)
+  clearAll();
   if (sign == "+") {
-    result = operate(add, 5, 1);
+    result = operate(add, a, b);
   }
+  document.querySelector(".numArray").innerHTML = result;
+
   console.log(result);
 });
 // console.log(equal);
