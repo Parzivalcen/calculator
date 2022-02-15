@@ -13,6 +13,8 @@ let btnValue;
 let displayValue = 0;
 let number = document.createElement("p"); //Numbers of Screen
 number.classList.add("numArray"); //add class to number
+let operationScreen = document.createElement("p"); // show equation on screen
+operationScreen.classList.add("operation"); //add class to number
 const back = document.querySelector("#delete"); //backspace
 const clear = document.querySelector("#clear"); //Clear Screen
 let c = 0; // for the operator function
@@ -24,6 +26,7 @@ btns.forEach((e) => {
     btnValue = document.createTextNode(btnValue);
     number.appendChild(btnValue);
     screen.appendChild(number);
+    screen.appendChild(operationScreen);
     displayValue = number.innerHTML;
     // console.log(displayValue);
   });
@@ -56,14 +59,15 @@ clear.addEventListener("click", () => {
 
 function clearAll() {
   document.querySelector(".numArray").innerHTML = "";
+  document.querySelector(".operation").innerHTML = "";
 }
 
 // make the calculator work
 // the equal sign should call the operator function pressed
 // asign functions to the operators buttons, but dont call until equal sign is pressed
 // when operator or equal is pressed asign the current value to variable
-// 
-// SHOW OPERATOR 
+//
+// SHOW OPERATOR
 const equal = document.querySelector("#equal");
 let signs = document.querySelectorAll(".sign");
 let sign;
@@ -73,28 +77,33 @@ let b = 5;
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
     sign = element.innerHTML;
-    a = +number.innerHTML; // assign diplay value to a variable and cleared, so can introduce the b variable 
-    clearAll()
-    console.log(a)
+    a = +number.innerHTML; // assign diplay value to a variable and cleared, so can introduce the b variable
+    clearAll();
+    document.querySelector(".operation").innerHTML = `${a} ${sign}`; //operation on screen
+    console.log(a);
     // console.log(typeof sign);
   });
 });
 equal.addEventListener("click", () => {
   // if sign equals operator, operator equals ==
   let result = 0;
-  b = +number.innerHTML;//assign display value to second variable and cleared so result can be shown 
-  console.log(b)
+  b = +number.innerHTML; //assign display value to second variable and cleared so result can be shown
+
+  console.log(b);
   clearAll();
   if (sign == "+") {
     result = operate(add, a, b);
-  }else if(sign == '-'){
+  } else if (sign == "-") {
     result = operate(substract, a, b);
-  }else if (sign == 'x'){
+  } else if (sign == "x") {
     result = operate(multiply, a, b);
-  }else if(sign == '/'){
+  } else if (sign == "/") {
     result == operate(divide, a, b);
   }
   document.querySelector(".numArray").innerHTML = result;
+  document.querySelector(
+    ".operation"
+  ).innerHTML = `${a} ${sign} ${b} = ${result} `; //operation on screen
 
   console.log(result);
 });

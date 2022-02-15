@@ -130,7 +130,10 @@ utility clases
   border: 0;
 }
 body {
-  background: #c3c8cc;
+  background: #6883ba;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 /* ----------
 CALCULATOR
@@ -142,24 +145,102 @@ CALCULATOR
 }
 
 .calculator {
-  border: 1px solid limegreen;
+  /* border: 1px solid limegreen; */
+  border: 1rem solid white;
+  border-radius: 10px;
 }
 
 .screen {
-  width: 300px;
+  width: 400px;
   height: 100px;
-  background: white;
+  background: transparent;
+  /* border: 1rem solid white; */
+  padding: 5px;
 }
 .buttons {
-  max-width: 300px;
-  width: 300px;
+  /* border: 1rem solid white; */
+  max-width: 400px;
+  width: 400px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  padding: 5px;
 }
 .btn-c {
   padding: 1.3rem;
 }
+.btn {
+  border-radius: 10px;
+}
 #delete {
   padding: 1.3rem;
+}
+/* Naming number for grid */
+/* operators */
+#plus {
+  grid-area: sum;
+}
+#minus {
+  grid-area: minus;
+}
+#mult {
+  grid-area: mult;
+}
+#divide {
+  grid-area: divide;
+}
+/* end operators */
+
+/* numbers */
+#one {
+  grid-area: one;
+}
+#two {
+  grid-area: two;
+}
+#three {
+  grid-area: three;
+}
+#four {
+  grid-area: four;
+}
+#five {
+  grid-area: five;
+}
+#six {
+  grid-area: six;
+}
+#seven {
+  grid-area: seven;
+}
+#eight {
+  grid-area: eight;
+}
+#nine {
+  grid-area: nine;
+}
+#zero {
+  grid-area: zero;
+}
+#dot {
+  grid-area: dot;
+}
+/* end numbers */
+
+/* Utilities calc */
+#equal {
+  grid-area: equal;
+}
+#clear {
+  grid-area: clear;
+}
+#delete {
+  grid-area: delete;
+}
+.buttons {
+  grid-template-areas:
+    "seven eight nine sum divide"
+    "four five six minus clear"
+    "one two three mult clear"
+    "dot zero delete equal equal";
 }
