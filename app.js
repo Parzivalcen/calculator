@@ -1,32 +1,44 @@
 // show buttons pressed value on screen
+// create buttos 0 to 9, operators, clear and dot
+//
 // get the buttons value using query selector and event listener
+// using for each loop and innerHTML, we get the value of each btn when is clicked
 // We append this to our number element <<p>> variable
 // then we append the <<p>> to our screen div.
 
 // Show the button value in the screen
-const btns = document.querySelectorAll(".btn-c");
-const screen = document.querySelector(".screen");
-let number = document.createElement("p");
-number.classList.add("numArray");
+const btns = document.querySelectorAll(".btn-c"); //Buttons
+const screen = document.querySelector(".screen"); //Screen
+let btnValue;
+let displayValue = 0;
+let number = document.createElement("p"); //Numbers of Screen
+number.classList.add("numArray"); //add class to number
+const back = document.querySelector("#delete"); //backspace
+const clear = document.querySelector("#clear"); //Clear Screen
+let c = 0; // for the operator function
 // console.log(btns);
 
 btns.forEach((e) => {
   e.addEventListener("click", (event) => {
-    let btnValue = event.target.innerText;
+    btnValue = event.target.innerHTML;
     btnValue = document.createTextNode(btnValue);
     number.appendChild(btnValue);
     screen.appendChild(number);
-    console.log(number.innerHTML);
+    displayValue = number.innerHTML;
+    // console.log(displayValue);
   });
 });
 
-const back = document.querySelector("#delete");
-back.addEventListener("click", (event) => {
+// Back Space
+// we get the value of the number (div .screen) > (.numArray "p")
+// we slice the last number
+// we insert the value sliced in the original DOM element
+// call it in a add event listener funtion on BUTTON.
+
+back.addEventListener("click", () => {
   backspace();
-  // back = document.createTextNode(backspace(number.innerHTML));
-  // number.removeChild(btnValue);
-  // number.appendChild(back);
 });
+//
 function backspace() {
   let value = document.querySelector(".numArray").innerHTML;
   document.querySelector(".numArray").innerHTML = value.slice(
@@ -35,10 +47,43 @@ function backspace() {
   );
 }
 
-function showNumber(e) {
-  btnValue = e.innerText;
-  console.log(btnValue);
+// Clear
+// Delete the (number <<p>>) valriable
+
+clear.addEventListener("click", () => {
+  clearAll();
+});
+
+function clearAll() {
+  document.querySelector(".numArray").innerHTML = "";
 }
+
+// make the calculator work
+// the equal sign should call the operator function pressed
+// asign functions to the operators buttons, but dont call until equal sign is pressed
+// when operator is pressed asign the current value to variable
+// use split to divide when there is an operator sign
+// [0] = a
+// [1] = b
+const equal = document.querySelector("#equal");
+let signs = document.querySelectorAll(".sign");
+let sign;
+sign = signs.forEach((element) => {
+  element.addEventListener("click", () => {
+    sign = element.innerHTML;
+    a = current;
+    console.log(typeof sign);
+  });
+});
+equal.addEventListener("click", () => {
+  // if sign equals operator, operator equals ==
+  let result = 0;
+  if (sign == "+") {
+    result = operate(add, 5, 1);
+  }
+  console.log(result);
+});
+// console.log(equal);
 
 // Calculator
 // Create add function
@@ -77,7 +122,6 @@ function divide(a, b) {
 }
 
 // Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
-let c = 0;
 function operate(operator, a, b) {
   c = operator(a, b);
   return c;
