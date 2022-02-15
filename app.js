@@ -63,9 +63,7 @@ function clearAll() {
 // asign functions to the operators buttons, but dont call until equal sign is pressed
 // when operator or equal is pressed asign the current value to variable
 // 
-// use split to divide when there is an operator sign
-// [0] = a
-// [1] = b
+// SHOW OPERATOR 
 const equal = document.querySelector("#equal");
 let signs = document.querySelectorAll(".sign");
 let sign;
@@ -75,7 +73,7 @@ let b = 5;
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
     sign = element.innerHTML;
-    a = +number.innerHTML;
+    a = +number.innerHTML; // assign diplay value to a variable and cleared, so can introduce the b variable 
     clearAll()
     console.log(a)
     // console.log(typeof sign);
@@ -84,11 +82,17 @@ sign = signs.forEach((element) => {
 equal.addEventListener("click", () => {
   // if sign equals operator, operator equals ==
   let result = 0;
-  b = +number.innerHTML;
+  b = +number.innerHTML;//assign display value to second variable and cleared so result can be shown 
   console.log(b)
   clearAll();
   if (sign == "+") {
     result = operate(add, a, b);
+  }else if(sign == '-'){
+    result = operate(substract, a, b);
+  }else if (sign == 'x'){
+    result = operate(multiply, a, b);
+  }else if(sign == '/'){
+    result == operate(divide, a, b);
   }
   document.querySelector(".numArray").innerHTML = result;
 
