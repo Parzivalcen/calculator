@@ -15,23 +15,36 @@ let number = document.createElement("p"); //Numbers of Screen
 number.classList.add("numArray"); //add class to number
 let operationScreen = document.createElement("p"); // show equation on screen
 operationScreen.classList.add("operation"); //add class to number
+
 const back = document.querySelector("#delete"); //backspace
 const clear = document.querySelector("#clear"); //Clear Screen
 let c = 0; // for the operator function
 // console.log(btns);
 
+// MAKE CALC WORK VARIABLES
+const equal = document.querySelector("#equal");
+let signs = document.querySelectorAll(".sign");
+let sign;
+// for assigment
+let a = null;
+let b = null;
+let result = 0;
+
 btns.forEach((e) => {
   e.addEventListener("click", (event) => {
-    btnValue = event.target.innerHTML;
-    btnValue = document.createTextNode(btnValue);
-    number.appendChild(btnValue);
-    screen.appendChild(number);
-    screen.appendChild(operationScreen);
-    displayValue = number.innerHTML;
-    // console.log(displayValue);
+    onDisplay(event);
   });
 });
-
+function onDisplay(e) {
+  btnValue = e.target.innerHTML;
+  btnValue = document.createTextNode(btnValue);
+  number.appendChild(btnValue);
+  screen.appendChild(number);
+  screen.appendChild(operationScreen);
+  displayValue = number.innerHTML;
+  // console.log(displayValue);
+  // when num is pressed we want result(think about adding another function for this)
+}
 // Back Space
 // we get the value of the number (div .screen) > (.numArray "p")
 // we slice the last number
@@ -68,25 +81,29 @@ function clearAll() {
 // when operator or equal is pressed asign the current value to variable
 //
 // SHOW OPERATOR
-const equal = document.querySelector("#equal");
-let signs = document.querySelectorAll(".sign");
-let sign;
-// for assigment
-let a = 1;
-let b = 5;
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
-    sign = element.innerHTML;
-    a = +number.innerHTML; // assign diplay value to a variable and cleared, so can introduce the b variable
-    clearAll();
-    document.querySelector(".operation").innerHTML = `${a} ${sign}`; //operation on screen
-    console.log(a);
-    // console.log(typeof sign);
+    pressedOperand(element);
   });
 });
+
+function pressedOperand(element) {
+  sign = element.innerHTML;
+  a = +displayValue; // assign diplay value to a variable and cleared, so can introduce the b variable
+  b = a;
+  clearAll();
+  document.querySelector(".operation").innerHTML = `${a} ${sign}`; //operation on screen
+  // console.log(result);
+}
+
+// chain Operations
+
 equal.addEventListener("click", () => {
+  equalSign();
+});
+
+function equalSign() {
   // if sign equals operator, operator equals ==
-  let result = 0;
   b = +number.innerHTML; //assign display value to second variable and cleared so result can be shown
 
   console.log(b);
@@ -100,13 +117,14 @@ equal.addEventListener("click", () => {
   } else if (sign == "/") {
     result == operate(divide, a, b);
   }
+  b = result;
   document.querySelector(".numArray").innerHTML = result;
   document.querySelector(
     ".operation"
   ).innerHTML = `${a} ${sign} ${b} = ${result} `; //operation on screen
 
   console.log(result);
-});
+}
 // console.log(equal);
 
 // Calculator

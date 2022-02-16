@@ -151,16 +151,25 @@ CALCULATOR
 }
 
 .screen {
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
   height: 100px;
   background: transparent;
   /* border: 1rem solid white; */
   padding: 5px;
 }
+.screen p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: white;
+}
 .buttons {
-  /* border: 1rem solid white; */
-  max-width: 400px;
-  width: 400px;
+  border-top: 4px solid white;
+  max-width: 350px;
+  width: 350px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
