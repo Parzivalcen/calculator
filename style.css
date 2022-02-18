@@ -130,7 +130,7 @@ utility clases
   border: 0;
 }
 body {
-  background: #6883ba;
+  background: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,36 +138,51 @@ body {
 /* ----------
 CALCULATOR
 ------------- */
+.container-main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+}
 .container {
   display: flex;
-  max-width: 300px;
-  width: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  /* height: 100vh; */
+  margin-block: auto;
 }
 
 .calculator {
   /* border: 1px solid limegreen; */
-  border: 1rem solid white;
+  border: 1px solid white;
+  max-height: 400px;
+  max-width: 360px;
   border-radius: 10px;
+  /* margin-block: auto; */
 }
 
 .screen {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
   width: 350px;
   height: 100px;
-  background: transparent;
+  background: rgb(24, 24, 24);
   /* border: 1rem solid white; */
   padding: 5px;
 }
-.data-previous-operand{
+.data-previous-operand {
   font-size: 1.3rem;
-  color: rgb(49, 48, 48);
+  color: rgb(196, 196, 196);
 }
-.data-current-operand{
+.data-current-operand {
   font-size: 2rem;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .buttons {
@@ -176,14 +191,36 @@ CALCULATOR
   width: 350px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
+  gap: 1px;
   padding: 5px;
 }
 .btn-c {
   padding: 1.3rem;
 }
 .btn {
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  background-color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+.sign,
+#clear,
+#delete {
+  background-color: rgb(223, 223, 223);
+}
+#equal {
+  background-color: rgba(0, 0, 0, 0.658);
+  color: white;
+}
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.75);
+  color: white;
+}
+#clear:hover,
+#delete:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.75);
+  color: white;
 }
 #delete {
   padding: 1.3rem;
@@ -256,4 +293,17 @@ CALCULATOR
     "four five six minus clear"
     "one two three mult clear"
     "dot zero delete equal equal";
+}
+/* FOOTER */
+footer {
+  margin-top: auto;
+  display: flex;
+  gap: 1rem;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  background-color: rgb(170, 170, 170);
+  /* min-width: 100vh; */
+  min-width: 100%;
+  max-width: 100vh;
+  padding-block: 2rem;
 }
