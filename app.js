@@ -3,37 +3,30 @@
 //
 // get the buttons value using query selector and event listener
 // using for each loop and innerHTML, we get the value of each btn when is clicked
-// We append this to our number element <<p>> variable
-// then we append the <<p>> to our screen div.
+// We append this to our number element current operand
+// show current operand on screen
 
 // Show the button value in the screen
 const btns = document.querySelectorAll(".btn-c"); //Buttons
-const screen = document.querySelector(".screen"); //Screen
-let btnValue;
-let displayValue = 0;
-const previousOperandTextElement = document.querySelector('[data-previous-operand]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
-let currentOperand = '';
-let previousOperand = '';
-console.log(currentOperandTextElement)
-let number = document.createElement("p"); //Numbers of Screen
-number.classList.add("numArray"); //add class to number
-let operationScreen = document.createElement("p"); // show equation on screen
-operationScreen.classList.add("operation"); //add class to number
+
+const previousOperandTextElement = document.querySelector(
+  "[data-previous-operand]"
+);
+const currentOperandTextElement = document.querySelector(
+  "[data-current-operand]"
+);
+// for assigment
+let currentOperand = "";
+let previousOperand = "";
+let result = 0;
 
 const back = document.querySelector("#delete"); //backspace
 const clear = document.querySelector("#clear"); //Clear Screen
-let c = 0; // for the operator function
-// console.log(btns);
 
 // MAKE CALC WORK VARIABLES
 const equal = document.querySelector("#equal");
 let signs = document.querySelectorAll(".sign");
 let sign;
-// for assigment
-let a = null;
-let b = null;
-let result = 0;
 
 // Show the number clicked on screen
 btns.forEach((e) => {
@@ -45,80 +38,97 @@ btns.forEach((e) => {
 
 function onDisplay() {
   currentOperandTextElement.innerHTML = currentOperand;
-  previousOperandTextElement.innerHTML = previousOperand;
-  // console.log(displayValue);
-  // when num is pressed we want result(think about adding another function for this)
+  // show operator
+  if (sign != null) {
+    previousOperandTextElement.innerHTML = `${previousOperand} ${sign}`;
+  } else {
+    previousOperandTextElement.innerHTML = "";
+  }
 }
-// append num and make sure only one dot can be entered
-function append(number){
-  if(number === '.' && currentOperand.includes('.')) return;
-  currentOperand = currentOperand.toString() + number.toString();
-}
-// When a sign is prlessed the current operand becomes the previous one
-
-
-
-// Back Space
-// we get the value of the current Operand
-// we slice the last number
-// we insert the value sliced in the original DOM element
-// call it in a add event listener funtion on BUTTON and update the display
-
-back.addEventListener("click", () => {
-  backspace();
-  onDisplay();
-});
-//
-function backspace() {
-  
-  currentOperand = currentOperand.slice(
-    0,
-    currentOperand.length - 1
-  );
-}
-
-// Clear
-// empty current and prvious operand, the sign aswell 
 
 clear.addEventListener("click", () => {
   clearAll();
   onDisplay();
 });
 
-function clearAll() {
-  currentOperand = ''
-  previousOperand = ''
-  sign = undefined;
-}
+// Back Space
+// we get the value of the current Operand
+// we slice the last number
+// we insert the value sliced in the original DOM element
+// call it in a add event listener funtion on BUTTON and update the display
+back.addEventListener("click", () => {
+  backspace();
+  onDisplay();
+});
 
-// make the calculator work
-// the equal sign should call the operator function pressed
+// any sign should call the calc function when pressed and previous is not empty
 // asign functions to the operators buttons, but dont call until equal sign is pressed
-// when operator or equal is pressed asign the current value to variable
+// when operator or equal is pressed asign the current value to curren operator var
 //
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
     pressedOperand(element);
-    onDisplay()
+    onDisplay();
   });
 });
+
+equal.addEventListener("click", () => {
+  calc();
+  onDisplay();
+});
+
+// append num and make sure only one dot can be entered
+function append(number) {
+  if (number === "." && currentOperand.includes(".")) return;
+  currentOperand = currentOperand.toString() + number.toString();
+}
+// When a sign is prlessed the current operand becomes the previous one
+
+//
+function backspace() {
+  currentOperand = currentOperand.slice(0, currentOperand.length - 1);
+}
+
+// Clear
+// empty current and prvious operand, the sign aswell
+function clearAll() {
+  currentOperand = "";
+  previousOperand = "";
+  result = 0;
+  sign = undefined;
+}
+
 // When a sign is prlessed the current operand becomes the previous one
 // store the sign
-// if there is a previous operan when sign is pressed, perform an operation
+// if there is a previous operand when sign is pressed, perform an operation
 function pressedOperand(element) {
-  if(previousOperand !== ''){
-    calc()
+  if (previousOperand !== "") {
+    calc();
   }
   previousOperand = currentOperand;
-  currentOperand = '';
+  currentOperand = "";
   sign = element.innerHTML;
-  console.log(sign)
+  console.log(sign);
 }
 
 // Make the calculations
-function calc (){
+function calc() {
+  // handle if = is pressed early
+  if (!previousOperand) {
+    return currentOperand;
+  }
+  if (!currentOperand) {
+    return previousOperand;
+  }
   let prev = parseFloat(previousOperand);
-  let current = parseFloat(currentOperand)
+  let current = parseFloat(currentOperand);
+  // check if trying to divide by zero
+  if (sign == "/" && current == 0) {
+    previousOperand = "";
+    sign = undefined;
+    return (currentOperand = "you tried dividing by zero");
+  }
+
   if (sign == "+") {
     result = operate(add, prev, current);
   } else if (sign == "-") {
@@ -126,22 +136,17 @@ function calc (){
   } else if (sign == "x") {
     result = operate(multiply, prev, current);
   } else if (sign == "/") {
-    result == operate(divide, prev, current);
+    result = operate(divide, prev, current);
+  }
+  result = result.toString();
+  if (result.length > 5) {
+    result = result.slice(0, 8);
   }
   currentOperand = result;
+  previousOperand = "";
+  sign = undefined;
 }
 
-equal.addEventListener("click", () => {
-  equalSign();
-  onDisplay();
-});
-
-function equalSign() {
-  // if sign equals operator, operator equals ==
-  calc();
-  currentOperand = result;
-  previousOperand = '';
-}
 // console.log(equal);
 
 // Calculator
