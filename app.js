@@ -11,6 +11,11 @@ const btns = document.querySelectorAll(".btn-c"); //Buttons
 const screen = document.querySelector(".screen"); //Screen
 let btnValue;
 let displayValue = 0;
+const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+const currentOperandTextElement = document.querySelector('[data-current-operand]')
+let currentOperand = '';
+let previousOperand = '';
+console.log(currentOperandTextElement)
 let number = document.createElement("p"); //Numbers of Screen
 number.classList.add("numArray"); //add class to number
 let operationScreen = document.createElement("p"); // show equation on screen
@@ -30,49 +35,60 @@ let a = null;
 let b = null;
 let result = 0;
 
+// Show the number clicked on screen
 btns.forEach((e) => {
   e.addEventListener("click", (event) => {
-    onDisplay(event);
+    append(e.innerHTML);
+    onDisplay();
   });
 });
-function onDisplay(e) {
-  btnValue = e.target.innerHTML;
-  btnValue = document.createTextNode(btnValue);
-  number.appendChild(btnValue);
-  screen.appendChild(number);
-  screen.appendChild(operationScreen);
-  displayValue = number.innerHTML;
+
+function onDisplay() {
+  currentOperandTextElement.innerHTML = currentOperand;
+  previousOperandTextElement.innerHTML = previousOperand;
   // console.log(displayValue);
   // when num is pressed we want result(think about adding another function for this)
 }
+// append num and make sure only one dot can be entered
+function append(number){
+  if(number === '.' && currentOperand.includes('.')) return;
+  currentOperand = currentOperand.toString() + number.toString();
+}
+// When a sign is prlessed the current operand becomes the previous one
+
+
+
 // Back Space
-// we get the value of the number (div .screen) > (.numArray "p")
+// we get the value of the current Operand
 // we slice the last number
 // we insert the value sliced in the original DOM element
-// call it in a add event listener funtion on BUTTON.
+// call it in a add event listener funtion on BUTTON and update the display
 
 back.addEventListener("click", () => {
   backspace();
+  onDisplay();
 });
 //
 function backspace() {
-  let value = document.querySelector(".numArray").innerHTML;
-  document.querySelector(".numArray").innerHTML = value.slice(
+  
+  currentOperand = currentOperand.slice(
     0,
-    value.length - 1
+    currentOperand.length - 1
   );
 }
 
 // Clear
-// Delete the (number <<p>>) valriable
+// empty current and prvious operand, the sign aswell 
 
 clear.addEventListener("click", () => {
   clearAll();
+  onDisplay();
 });
 
 function clearAll() {
-  document.querySelector(".numArray").innerHTML = "";
-  document.querySelector(".operation").innerHTML = "";
+  currentOperand = ''
+  previousOperand = ''
+  sign = undefined;
 }
 
 // make the calculator work
@@ -80,50 +96,51 @@ function clearAll() {
 // asign functions to the operators buttons, but dont call until equal sign is pressed
 // when operator or equal is pressed asign the current value to variable
 //
-// SHOW OPERATOR
 sign = signs.forEach((element) => {
   element.addEventListener("click", () => {
     pressedOperand(element);
+    onDisplay()
   });
 });
-
+// When a sign is prlessed the current operand becomes the previous one
+// store the sign
+// if there is a previous operan when sign is pressed, perform an operation
 function pressedOperand(element) {
+  if(previousOperand !== ''){
+    calc()
+  }
+  previousOperand = currentOperand;
+  currentOperand = '';
   sign = element.innerHTML;
-  a = +displayValue; // assign diplay value to a variable and cleared, so can introduce the b variable
-  b = a;
-  clearAll();
-  document.querySelector(".operation").innerHTML = `${a} ${sign}`; //operation on screen
-  // console.log(result);
+  console.log(sign)
 }
 
-// chain Operations
+// Make the calculations
+function calc (){
+  let prev = parseFloat(previousOperand);
+  let current = parseFloat(currentOperand)
+  if (sign == "+") {
+    result = operate(add, prev, current);
+  } else if (sign == "-") {
+    result = operate(substract, prev, current);
+  } else if (sign == "x") {
+    result = operate(multiply, prev, current);
+  } else if (sign == "/") {
+    result == operate(divide, prev, current);
+  }
+  currentOperand = result;
+}
 
 equal.addEventListener("click", () => {
   equalSign();
+  onDisplay();
 });
 
 function equalSign() {
   // if sign equals operator, operator equals ==
-  b = +number.innerHTML; //assign display value to second variable and cleared so result can be shown
-
-  console.log(b);
-  clearAll();
-  if (sign == "+") {
-    result = operate(add, a, b);
-  } else if (sign == "-") {
-    result = operate(substract, a, b);
-  } else if (sign == "x") {
-    result = operate(multiply, a, b);
-  } else if (sign == "/") {
-    result == operate(divide, a, b);
-  }
-  b = result;
-  document.querySelector(".numArray").innerHTML = result;
-  document.querySelector(
-    ".operation"
-  ).innerHTML = `${a} ${sign} ${b} = ${result} `; //operation on screen
-
-  console.log(result);
+  calc();
+  currentOperand = result;
+  previousOperand = '';
 }
 // console.log(equal);
 

@@ -153,19 +153,23 @@ CALCULATOR
 .screen {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: flex-end;
   width: 350px;
   height: 100px;
   background: transparent;
   /* border: 1rem solid white; */
   padding: 5px;
 }
-.screen p {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
+.data-previous-operand{
   font-size: 1.3rem;
-  color: white;
+  color: rgb(49, 48, 48);
 }
+.data-current-operand{
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+}
+
 .buttons {
   border-top: 4px solid white;
   max-width: 350px;
