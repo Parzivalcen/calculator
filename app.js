@@ -23,16 +23,26 @@ let result = 0;
 const back = document.querySelector("#delete"); //backspace
 const clear = document.querySelector("#clear"); //Clear Screen
 
-
+// Keyboard Support
 // get the keys
 // show the key on the calc when pressed
-window.addEventListener('keydown', (e) => {
-  const key = document.querySelector(`[data-key="${e.key}"]`)
-  if(key.className.includes('btn-c')){
-    console.log(key);
+window.addEventListener("keydown", (e) => {
+  const key = document.querySelector(`[data-key="${e.key}"]`);
+  if (!key) return;
+  key.focus();
+  if (key.className.includes("btn-c")) {
     append(key.innerHTML);
     onDisplay();
-  };
+  } else if (key.className.includes("sign")) {
+    pressedOperand(key);
+    onDisplay();
+  } else if (key.className.includes("Enter")) {
+    calc();
+    onDisplay();
+  } else if (key.className.includes("Backspace")) {
+    backspace();
+    onDisplay();
+  }
 });
 
 // MAKE CALC WORK VARIABLES
