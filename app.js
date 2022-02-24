@@ -23,6 +23,18 @@ let result = 0;
 const back = document.querySelector("#delete"); //backspace
 const clear = document.querySelector("#clear"); //Clear Screen
 
+
+// get the keys
+// show the key on the calc when pressed
+window.addEventListener('keydown', (e) => {
+  const key = document.querySelector(`[data-key="${e.key}"]`)
+  if(key.className.includes('btn-c')){
+    console.log(key);
+    append(key.innerHTML);
+    onDisplay();
+  };
+});
+
 // MAKE CALC WORK VARIABLES
 const equal = document.querySelector("#equal");
 let signs = document.querySelectorAll(".sign");
