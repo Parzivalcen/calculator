@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./imgs/abacus_1f9ee.png" type="image/icon type" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <div class="screen">
+          <div data-previous-operand class="data-previous-operand"></div>
+          <div data-current-operand class="data-current-operand"></div>
+        </div>
+        <div class="buttons">
+          <button data-key="Enter" class="Enter btn" id="equal">=</button>
+          <button data-key="" class="btn" id="clear">C</button>
+          <button data-key="Backspace" class="Backspace btn" id="delete">
+            <i><img src="./imgs/backspace.png" alt="" /></i>
+          </button>
+          <button data-key="+" class="btn sign" id="plus">+</button>
+          <button data-key="-" class="btn sign" id="minus">-</button>
+          <button data-key="*" class="btn sign" id="mult">x</button>
+          <button data-key="/" class="btn sign" id="divide">/</button>
+          <button data-key="1" class="btn btn-c" id="one">1</button>
+          <button data-key="2" class="btn btn-c" id="two">2</button>
+          <button data-key="3" class="btn btn-c" id="three">3</button>
+          <button data-key="4" class="btn btn-c" id="four">4</button>
+          <button data-key="5" class="btn btn-c" id="five">5</button>
+          <button data-key="6" class="btn btn-c" id="six">6</button>
+          <button data-key="7" class="btn btn-c" id="seven">7</button>
+          <button data-key="8" class="btn btn-c" id="eight">8</button>
+          <button data-key="9" class="btn btn-c" id="nine">9</button>
+          <button data-key="0" class="btn btn-c" id="zero">0</button>
+          <button data-key="." class="btn btn-c" id="dot">.</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      &copy; DavidCendev
+      <a
+        target="_blank"
+        href="https://github.com/Parzivalcen/calculator/tree/main"
+        ><img src="./imgs/iconmonstr-github-1.svg" alt=""
+      /></a>
+    </footer>
+  </body>
+</html>
