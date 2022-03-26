@@ -112,7 +112,7 @@ utility clases
   /* outline: 1px solid red; */
 }
 .container {
-  padding-inline: 2rem;
+  padding-inline: 0rem;
   margin-inline: auto;
   max-width: 1200px;
 }
@@ -163,45 +163,48 @@ CALCULATOR
 }
 
 .screen {
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
   width: 350px;
-  height: 100px;
+  height: 200px;
   background: rgb(24, 24, 24);
   /* border: 1rem solid white; */
   padding: 5px;
 }
 .data-previous-operand {
-  font-size: 1.3rem;
-  color: rgb(196, 196, 196);
+  font-size: 2rem;
+  color: #728ab79f;
 }
 .data-current-operand {
-  font-size: 2rem;
+  font-size: 4rem;
   color: rgb(255, 255, 255);
 }
-
+.lines img {
+  margin-inline: auto;
+  margin-block: 0.3rem;
+}
 .buttons {
-  
   border-top: 4px solid white;
   max-width: 350px;
   width: 350px;
+  padding: 5px;
+
+  background-color: #f0f0f3;
+}
+.buttons-box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 16px;
-  padding: 5px;
-  padding-top: 2rem;
-  background-color: #F0F0F3;
+  gap: 10px;
 }
 .btn-c {
   padding: 1.3rem;
   outline: none;
   border: none;
   border-radius: 20px;
+  color: #4a6dad;
 }
 .btn {
   /* border-radius: 10px; */
@@ -209,24 +212,40 @@ CALCULATOR
   transition: 0.2s;
   border: none;
   border-radius: 20px;
-
+  background-color: #f0f0f3;
+  box-shadow: -10px -10px 24px rgba(223, 222, 222, 0.6),
+    10px 10px 24px rgba(174, 174, 192, 0.329);
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 .sign,
 #clear,
 #delete {
-  background-color: rgb(223, 223, 223);
+  background-color: #f0f0f3;
   outline: none;
   border: none;
   border-radius: 20px;
+  box-shadow: -10px -10px 24px rgba(223, 222, 222, 0.6),
+    10px 10px 24px rgba(174, 174, 192, 0.329);
 }
 #equal {
-  background-color: rgba(0, 0, 0, 0.658);
+  background-color: #2dd3c5;
   color: white;
   outline: none;
   border: none;
   border-radius: 20px;
-
 }
+/* dif colors */
+#clear,
+#divide {
+  color: #898989;
+}
+#plus,
+#mult,
+#minus {
+  color: #745ff2;
+}
+/* hover */
 .btn:hover,
 .btn:focus {
   cursor: pointer;
@@ -235,6 +254,11 @@ CALCULATOR
 }
 #clear:hover,
 #delete:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.75);
+  color: white;
+}
+#equal:hover {
   cursor: pointer;
   background-color: rgb(0, 0, 0, 0.75);
   color: white;
@@ -304,13 +328,35 @@ CALCULATOR
 #delete {
   grid-area: delete;
 }
-.buttons {
+.buttons-box {
   grid-template-areas:
-  "clear clear divide mult "
+    "clear clear divide mult "
     "seven eight nine sum"
     "four five six minus"
     "one two three equal"
     "dot zero delete equal";
+}
+.dots1 {
+  display: none;
+}
+@media screen and (min-width: 720px) {
+  .dots--1 {
+    display: inline-block;
+    position: relative;
+    left: -11em;
+    z-index: -1;
+    top: 10em;
+  }
+  .dots--2 {
+    display: inline-block;
+    position: relative;
+    left: 11em;
+    z-index: -1;
+    top: 43em;
+  }
+  .dots--2 img {
+    color: white;
+  }
 }
 /* FOOTER */
 footer {
