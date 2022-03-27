@@ -336,7 +336,8 @@ CALCULATOR
     "one two three equal"
     "dot zero delete equal";
 }
-.dots1 {
+.dots--1,
+.dots--2 {
   display: none;
 }
 @media screen and (min-width: 720px) {
